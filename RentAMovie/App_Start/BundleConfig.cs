@@ -23,7 +23,7 @@ namespace RentAMovie
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-lumen.min.css",
                       "~/Content/site.css"));
         }
     }
