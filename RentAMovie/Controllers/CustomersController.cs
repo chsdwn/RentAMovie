@@ -1,4 +1,5 @@
 ﻿using RentAMovie.Models;
+using RentAMovie.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -38,6 +39,52 @@ namespace RentAMovie.Controllers
                 return HttpNotFound();
 
             return View(customer);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var customer = this.context.Customers.SingleOrDefault(c => c.Id == id);
+
+            if (customer == null)
+                return HttpNotFound();
+
+            var viewModel = new CustomerFormViewModel
+            {
+                Customer = customer,
+                MembershipTypes = this.context.MembershipTypes.ToList()
+            };
+
+            return View("CustomerForm", viewModel);
+        }
+
+        public ActionResult New()
+        {
+            var membershipTypes = this.context.MembershipTypes.ToList();
+            var viewModel = new CustomerFormViewModel
+            {
+                MembershipTypes = membershipTypes
+            };
+            return View("CustomerForm", viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Save(Customer customer)
+        {
+            if (customer.Id == 0)
+                this.context.Customers.Add(customer);
+            else
+            {
+                var customerInDB = this.context.Customers.Single(c => c.Id == customer.Id);
+                //TryUpdateModel(customerInDB); This may cause security holes.
+                //Mapper.Map(customer, customerInDb) Same goes here.
+                customerInDB.Name = customer.Name;
+                customerInDB.BirthDate = customer.BirthDate;
+                customerInDB.MembershipTypeId = customer.MembershipTypeId;
+                customerInDB.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
+            }
+
+            this.context.SaveChanges();
+            return RedirectToAction("Index", "Customers");
         }
     }
 }
