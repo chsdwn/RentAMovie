@@ -26,8 +26,7 @@ namespace RentAMovie.Controllers
         // GET: Customer
         public ViewResult Index()
         {
-            var customers = this.context.Customers.Include(c => c.MembershipType).ToList();
-            return View(customers);
+            return View();
         }
 
         //[Route("customers/details/{id}:range(1,3)")]
@@ -62,14 +61,27 @@ namespace RentAMovie.Controllers
             var membershipTypes = this.context.MembershipTypes.ToList();
             var viewModel = new CustomerFormViewModel
             {
+                Customer = new Customer(),
                 MembershipTypes = membershipTypes
             };
             return View("CustomerForm", viewModel);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Customer customer)
         {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new CustomerFormViewModel
+                {
+                    Customer = customer,
+                    MembershipTypes = this.context.MembershipTypes.ToList()
+                };
+
+                return View("CustomerForm", viewModel);
+            }
+
             if (customer.Id == 0)
                 this.context.Customers.Add(customer);
             else

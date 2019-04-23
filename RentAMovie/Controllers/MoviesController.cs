@@ -62,6 +62,10 @@ namespace RentAMovie.Controllers
             var genres = this.context.Genres.ToList();
             var viewModel = new MovieFormViewModel
             {
+                Movie = new Movie
+                {
+                    ReleaseDate = DateTime.ParseExact("01.01.0001", "dd.MM.yyyy", null)
+                },
                 Genre = genres
             };
 
@@ -69,31 +73,38 @@ namespace RentAMovie.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Movie movie)
         {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new MovieFormViewModel
+                {
+                    Movie = movie,
+                    Genre = this.context.Genres.ToList()
+                };
+
+                return View("MoviesForm", viewModel);
+            }
+
+            // Add a new movie
             if (movie.Id == 0)
             {
-                movie.Genre = FindTheGenreFromId(movie.Genre.Id);
+                movie.DateAdded = DateTime.Now;
                 this.context.Movies.Add(movie);
             }
-                
+            // Edit an existing movie
             else
             {
                 var movieInDb = this.context.Movies.Single(m => m.Id == movie.Id);
-                var genre = this.context.Genres.Single(g => g.Id == movie.Genre.Id);
                 movieInDb.Name = movie.Name;
                 movieInDb.ReleaseDate = movie.ReleaseDate;
-                movieInDb.Genre = genre;     
+                movieInDb.GenreId = movie.GenreId;     
                 movieInDb.Stock = movie.Stock;
             }
 
             this.context.SaveChanges();
             return RedirectToAction("Index", "Movies");
-        }
-
-        private Genre FindTheGenreFromId(int id)
-        {
-            return this.context.Genres.Single(g => g.Id == id);
         }
     }
 }
