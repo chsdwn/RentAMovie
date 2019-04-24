@@ -26,10 +26,13 @@ namespace RentAMovie.Controllers
 
         public ViewResult Index()
         {
-            var movies = this.context.Movies.Include(m => m.Genre).ToList();
-            return View(movies);
+            if(User.IsInRole(RoleName.CanManageMovies))
+                return View("List");
+
+            return View("ReadOnlyList");
         }
 
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Details(int id)
         {
             var movie = this.context.Movies.Include(m => m.Genre).SingleOrDefault(m => m.Id == id);
@@ -40,6 +43,7 @@ namespace RentAMovie.Controllers
             return View(movie);
         }
 
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Edit(int id)
         {
             var movie = this.context.Movies.SingleOrDefault(m => m.Id == id);
@@ -57,6 +61,7 @@ namespace RentAMovie.Controllers
             return View("MoviesForm", viewModel);
         }
 
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult New()
         {
             var genres = this.context.Genres.ToList();
@@ -74,6 +79,7 @@ namespace RentAMovie.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Save(Movie movie)
         {
             if (!ModelState.IsValid)

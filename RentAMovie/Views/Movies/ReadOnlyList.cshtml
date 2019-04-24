@@ -1,0 +1,21 @@
+﻿@model List<RentAMovie.Models.Movie>
+@{ 
+    ViewBag.Title = "Movies";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table id="movies" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th colspan="1">Movie</th>
+            <th colspan="1">Genre</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+@section scripts
+{
+    @Scripts.Render("~/Scripts/custom/moviesReadOnly.js")
+}
