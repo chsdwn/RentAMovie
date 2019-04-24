@@ -3,6 +3,7 @@ using RentAMovie.Dtos;
 using RentAMovie.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -20,9 +21,14 @@ namespace RentAMovie.Controllers.Api
         }
 
         // GET /api/customers
-        public IEnumerable<CustomerDTO> GetCustomers()
+        public IHttpActionResult GetCustomers()
         {
-            return this.context.Customers.ToList().Select(Mapper.Map<Customer, CustomerDTO>);
+            var customerDTOs = this.context.Customers
+                .Include(c => c.MembershipType)
+                .ToList()
+                .Select(Mapper.Map<Customer, CustomerDTO>);
+
+            return Ok(customerDTOs);
         }
 
         // GET /api/customers/1

@@ -15,11 +15,11 @@ namespace RentAMovie.Dtos
         [StringLength(255)]
         public string Name { get; set; }
 
-        public Genre Genre { get; set; }
-
         [Display(Name = "Genre")]
         [Required]
         public byte GenreId { get; set; }
+
+        public GenreDTO Genre { get; set; }
 
         [Required]
         [Range(1, 20)]

@@ -1,33 +1,33 @@
 ﻿$(document).ready(function () {
-    $("#customers").DataTable({
+    var table = $("#movies").DataTable({
         ajax: {
-            url: "/api/customers",
+            url: "/api/movies",
             dataSrc: ""
         },
         columns: [
             {
                 data: "name",
-                render: function (data, type, customer) {
-                    return "<a href='/customers/edit/" + customer.id + "'>" + customer.name + "</a>";
+                render: function (data, type, movie) {
+                    return "<a href='/movies/edit/" + movie.id + "'>" + movie.name + "</a>";
                 }
             },
             {
-                data: "name"
+                data: "genre.name"
             },
             {
                 data: "id",
                 render: function (data) {
-                    return "<button class='btn btn-link js-delete' data-customer-id=" + data + ">Delete</button>";
+                    return "<button class='btn btn-link js-delete' data-movie-id=" + data + ">Delete</button>";
                 }
             }
         ]
     });
 
-    $("#customers").on("click", ".js-delete", function () {
+    $("#movies").on("click", ".js-delete", function () {
         var button = $(this);
 
         bootbox.confirm({
-            message: "Are you sure you want to delete this customer?",
+            message: "Are you sure you want to delete this movie?",
             buttons: {
                 confirm: {
                     label: 'Yes',
@@ -41,10 +41,10 @@
             callback: function (result) {
                 if (result) {
                     $.ajax({
-                        url: "/api/customers/" + button.attr("data-customer-id"),
+                        url: "/api/movies/" + button.attr("data-movie-id"),
                         method: "DELETE",
                         success: function () {
-                            button.parents("tr").remove();
+                            table.row(button.parents("tr")).remove().draw();
                         }
                     });
                 }

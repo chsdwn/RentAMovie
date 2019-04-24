@@ -21,5 +21,7 @@ namespace RentAMovie.Dtos
         public bool IsSubscribedToNewsletter { get; set; }
 
         public byte MembershipTypeId { get; set; }
+
+        public MembershipTypeDTO MembershipType { get; set; }
     }
 }

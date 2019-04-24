@@ -12,10 +12,15 @@ namespace RentAMovie.App_Start
     {
         public MappingProfile()
         {
-            CreateMap<Customer, CustomerDTO>().ForMember(c => c.Id, opt => opt.Ignore());
-            CreateMap<CustomerDTO, Customer>();
-            CreateMap<Movie, MovieDTO>().ForMember(m => m.Id, opt => opt.Ignore());
-            CreateMap<MovieDTO, Movie>();
+            // Domain to DTO
+            CreateMap<Customer, CustomerDTO>();
+            CreateMap<Movie, MovieDTO>();
+            CreateMap<Genre, GenreDTO>();
+            CreateMap<MembershipType, MembershipTypeDTO>();
+
+            // DTO to Domain
+            CreateMap<CustomerDTO, Customer>().ForMember(c => c.Id, opt => opt.Ignore());
+            CreateMap<MovieDTO, Movie>().ForMember(m => m.Id, opt => opt.Ignore());
         }
     }
 }
