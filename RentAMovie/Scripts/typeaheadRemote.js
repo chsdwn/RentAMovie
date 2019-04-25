@@ -45,19 +45,38 @@
         viewModel.movieIds.push(movie.id);
     });
 
-    $("#newRental").submit(function (e) {
-        e.preventDefault();
+    $.validator.addMethod("validCustomer", function () {
+        return viewModel.customerId && viewModel.customerId !== 0;  
+    }, "Please select a valid customer.");
 
-        $.ajax({
-            url: "/api/newRentals",
-            method: "post",
-            data: viewModel
-        })
-        .done(function () {
-            toastr.success("Rentals successfully recorded.");
-        })
-        .fail(function () {
-            toastr.error("Rentals successfully failed.");
-        });
+    $.validator.addMethod("atLeastOneMovie", function () {
+        return viewModel.movieIds.length > 0;
+    }, "Please select at least one movie.");
+
+    var validator = $("#newRental").validate({
+        submitHander: function () {
+            $.ajax({
+                url: "/api/newRentals",
+                method: "post",
+                data: viewModel
+            })
+            .done(function () {
+                toastr.success("Rentals successfully recorded.");
+
+                // Clear form
+                $("#customer").typeahead("val", "");
+                $("#movie").typeahead("val", "");
+                $("#movies").empty();
+
+                viewModel = { movieIds =[] };
+
+                validator.resetForm();
+            })
+            .fail(function () {
+                toastr.error("Rentals successfully failed.");
+            });
+
+            return false;
+        }
     });
 });
