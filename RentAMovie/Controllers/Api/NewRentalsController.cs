@@ -1,4 +1,5 @@
 ﻿using RentAMovie.Dtos;
+using RentAMovie.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,34 @@ namespace RentAMovie.Controllers.Api
 {
     public class NewRentalsController : ApiController
     {
+        private DBEntity context;
+
+        public NewRentalsController()
+        {
+            this.context = new DBEntity();
+        }
+
         [HttpPost]
         public IHttpActionResult CreateNewRentals(NewRentalDTO newRentalDTO)
         {
-            throw new NotImplementedException();
+            var customer = this.context.Customers.Single(c => c.Id == newRentalDTO.Id);
+            var movies = this.context.Movies.Where(m => newRentalDTO.MovieIds.Contains(m.Id));
+
+            foreach(var movie in movies)
+            {
+                var rental = new Rental
+                {
+                    Customer = customer,
+                    Movie = movie,
+                    DateRented = DateTime.Now
+                };
+
+                this.context.Rentals.Add(rental);
+            }
+
+            this.context.SaveChanges();
+
+            return Ok();
         }
     }
 }
