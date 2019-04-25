@@ -649,8 +649,7 @@
     <Content Include="Scripts\typeahead.bundle.min.js" />
     <Content Include="Scripts\typeahead.jquery.js" />
     <Content Include="Scripts\typeahead.jquery.min.js" />
-    <Content Include="Scripts\typeaheadRemoteMovie.js" />
-    <Content Include="Scripts\typeaheadRemoteCustomer.js" />
+    <Content Include="Scripts\typeaheadRemote.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
