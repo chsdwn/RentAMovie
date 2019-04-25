@@ -21,7 +21,7 @@ namespace RentAMovie.Controllers.Api
         [HttpPost]
         public IHttpActionResult CreateNewRentals(NewRentalDTO newRentalDTO)
         {
-            var customer = this.context.Customers.Single(c => c.Id == newRentalDTO.Id);
+            var customer = this.context.Customers.Single(c => c.Id == newRentalDTO.CustomerId);
             var movies = this.context.Movies.Where(m => newRentalDTO.MovieIds.Contains(m.Id));
 
             foreach(var movie in movies)
