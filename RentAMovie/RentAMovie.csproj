@@ -319,6 +319,10 @@
     <Compile Include="Migrations\201904241132352_SeedUsers.Designer.cs">
       <DependentUpon>201904241132352_SeedUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904250948360_AddRentalTable.cs" />
+    <Compile Include="Migrations\201904250948360_AddRentalTable.Designer.cs">
+      <DependentUpon>201904250948360_AddRentalTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\DBEntity.cs" />
@@ -334,6 +338,7 @@
     <Compile Include="Models\Min18YearsIfAMember.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
+    <Compile Include="Models\Rental.cs" />
     <Compile Include="Models\ResetPasswordViewModel.cs" />
     <Compile Include="Models\RoleName.cs" />
     <Compile Include="Models\SendCodeViewModel.cs" />
@@ -780,6 +785,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904241132352_SeedUsers.resx">
       <DependentUpon>201904241132352_SeedUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904250948360_AddRentalTable.resx">
+      <DependentUpon>201904250948360_AddRentalTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
