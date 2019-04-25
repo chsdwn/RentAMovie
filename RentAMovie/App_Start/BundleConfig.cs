@@ -9,7 +9,8 @@ namespace RentAMovie
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/typeahead.bundle.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -28,7 +29,8 @@ namespace RentAMovie
             bundles.Add(new StyleBundle("~/Content/css").Include(
                         "~/Content/bootstrap-lumen.min.css",
                         "~/Content/DataTables/css/datatables.bootstrap4.css",
-                        "~/Content/site.css"));
+                        "~/Content/site.css",
+                        "~/Content/typeahead.css"));
         }
     }
 }
