@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Runtime.Caching;
 using System.Web;
 using System.Web.Mvc;
 using RentAMovie.Models;

@@ -6,9 +6,11 @@ using System.Web.Mvc;
 
 namespace RentAMovie.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
-        [AllowAnonymous]
+        // Deny caching
+        [OutputCache(Duration = 0, VaryByParam = "*", NoStore = true)]
         public ActionResult Index()
         {
             return View();
