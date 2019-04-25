@@ -107,7 +107,7 @@ namespace RentAMovie.Controllers
                 movieInDb.Name = movie.Name;
                 movieInDb.ReleaseDate = movie.ReleaseDate;
                 movieInDb.GenreId = movie.GenreId;     
-                movieInDb.Stock = movie.Stock;
+                movieInDb.NumberInStock = movie.NumberInStock;
             }
 
             this.context.SaveChanges();

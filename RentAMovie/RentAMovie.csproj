@@ -323,6 +323,10 @@
     <Compile Include="Migrations\201904250948360_AddRentalTable.Designer.cs">
       <DependentUpon>201904250948360_AddRentalTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904251007546_AddNumberAvailableToMoviesAndRenameStockToNumberInStock.cs" />
+    <Compile Include="Migrations\201904251007546_AddNumberAvailableToMoviesAndRenameStockToNumberInStock.Designer.cs">
+      <DependentUpon>201904251007546_AddNumberAvailableToMoviesAndRenameStockToNumberInStock.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\DBEntity.cs" />
@@ -788,6 +792,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904250948360_AddRentalTable.resx">
       <DependentUpon>201904250948360_AddRentalTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904251007546_AddNumberAvailableToMoviesAndRenameStockToNumberInStock.resx">
+      <DependentUpon>201904251007546_AddNumberAvailableToMoviesAndRenameStockToNumberInStock.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

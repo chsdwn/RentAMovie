@@ -24,7 +24,9 @@ namespace RentAMovie.Models
         [Required]
         [Display(Name = "Number in Stock")]
         [Range(1, 20)]
-        public int Stock { get; set; }
+        public byte NumberInStock { get; set; }
+
+        public byte NumberAvailable { get; set; }
 
         [Required]
         [Column(TypeName="date")]
