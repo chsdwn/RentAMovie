@@ -24,13 +24,15 @@ namespace RentAMovie
                         "~/Scripts/bootstrap.js",
                         "~/Scripts/bootbox.js",
                         "~/Scripts/DataTables/jquery.datatables.js",
-                        "~/Scripts/DataTables/datatables.bootstrap4.js"));
+                        "~/Scripts/DataTables/datatables.bootstrap4.js",
+                        "~/Scripts/toastr.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                         "~/Content/bootstrap-lumen.min.css",
                         "~/Content/DataTables/css/datatables.bootstrap4.css",
                         "~/Content/site.css",
-                        "~/Content/typeahead.css"));
+                        "~/Content/typeahead.css",
+                        "~/Content/toastr.css"));
         }
     }
 }

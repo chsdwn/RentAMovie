@@ -54,10 +54,10 @@
             data: viewModel
         })
         .done(function () {
-            console.log("done");
+            toastr.success("Rentals successfully recorded.");
         })
         .fail(function () {
-            console.log("fail");
+            toastr.error("Rentals successfully failed.");
         });
     });
 });
