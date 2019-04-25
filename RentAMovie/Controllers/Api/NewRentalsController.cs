@@ -19,10 +19,10 @@ namespace RentAMovie.Controllers.Api
         }
 
         [HttpPost]
-        public IHttpActionResult CreateNewRentals(NewRentalDTO newRentalDTO)
+        public IHttpActionResult CreateNewRentals(NewRentalDTO newRental)
         {
-            var customer = this.context.Customers.Single(c => c.Id == newRentalDTO.CustomerId);
-            var movies = this.context.Movies.Where(m => newRentalDTO.MovieIds.Contains(m.Id)).ToList();
+            var customer = this.context.Customers.Single(c => c.Id == newRental.CustomerId);
+            var movies = this.context.Movies.Where(m => newRental.MovieIds.Contains(m.Id)).ToList();
 
             foreach(var movie in movies)
             {

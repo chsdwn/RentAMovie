@@ -21,12 +21,15 @@ namespace RentAMovie.Controllers.Api
         }
 
         // GET /api/customers
-        public IHttpActionResult GetCustomers()
+        public IHttpActionResult GetCustomers(string query = null)
         {
-            var customerDTOs = this.context.Customers
-                .Include(c => c.MembershipType)
-                .ToList()
-                .Select(Mapper.Map<Customer, CustomerDTO>);
+            var customersQuery = this.context.Customers
+                .Include(c => c.MembershipType);
+
+            if (!String.IsNullOrWhiteSpace(query))
+                customersQuery = customersQuery.Where(c => c.Name.Contains(query));
+
+            var customerDTOs = customersQuery.ToList().Select(Mapper.Map<Customer, CustomerDTO>);
 
             return Ok(customerDTOs);
         }
